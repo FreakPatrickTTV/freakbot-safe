@@ -1,14 +1,15 @@
 export default async function handler(req, res) {
-  const { message } = req.query;
+  const { prompt } = req.query;
 
-  if (!message) {
-    return res.status(400).json({ error: "Missing message parameter" });
+  let reply = "Neviem, čo odpovedať.";
+  if (prompt?.toLowerCase().includes("ahoj")) {
+    reply = "Zdravím, tu FreakBot!";
+  } else if (prompt?.toLowerCase().includes("kto si")) {
+    reply = "Som tvoj Web3 AI asistent FreakBot.";
   }
-
-  const reply = `FreakBot v online režime odpovedá: "${message}"`;
 
   return res.status(200).json({
     message: reply,
-    avatar: "/avatar.png"
+    avatar: "/avatar.png",
   });
 }
